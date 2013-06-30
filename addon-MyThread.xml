@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="MyThread" title="من مواضيع العضو" version_string="1.0" version_id="1" url="http://www.sali4ever.com/vbstyle" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation>
+    <navigation navigation_id="myth" parent_navigation_id="userCustomization" display_order="200" link="options/list/MyThread" admin_permission_id="option" debug_only="0" hide_no_children="0"/>
+  </admin_navigation>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="abautme"><![CDATA[<div id="copyright" style="text-align:center;margin-top:20px;" dir="rtl">
+<img src="styles/default/xenforo/smilies/thumbsup.png"  alt='' />&nbsp;  
+<a href="http://www.sali4ever.com/vbstyle" target="_blank" class="Tooltip" title="برمجة بوسعيد مصطفى">خواطر ستايل</a> &nbsp;
+<img src="styles/default/xenforo/smilies/thumbsup.png"  alt='' />
+</div>]]></template>
+    <template title="myl"><![CDATA[<div id="copyright" style="text-align:center;margin-top:20px;" dir="rtl">
+<img src="styles/default/xenforo/smilies/thumbsup.png"  alt='' />&nbsp;  
+<a href="http://www.sali4ever.com/vbstyle" target="_blank" class="Tooltip" title="برمجة بوسعيد مصطفى">خواطر ستايل</a> &nbsp;
+<img src="styles/default/xenforo/smilies/thumbsup.png"  alt='' />
+</div>]]></template>
+    <template title="option_list_option_multi_fo"><![CDATA[<xen:selectunit label="{$preparedOption.title}" name="{$fieldPrefix}[{$preparedOption.option_id}]" value="{xen:raw $preparedOption.option_value}"
+hint="{$preparedOption.hint}" size="10" multiple="true">
+	<xen:options source="$formatParams" />
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+	<xen:html>
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+		{xen:raw $editLink}
+	</xen:html>
+</xen:selectunit>]]></template>
+  </admin_templates>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="MyThread_Listener" callback_method="load_controllers" active="1" description="Load controler from cache"/>
+    <listener event_id="template_create" execute_order="10" callback_class="MyThread_Listener" callback_method="template_create" active="1" description="create to my thread template"/>
+    <listener event_id="template_hook" execute_order="10" callback_class="MyThread_Listener" callback_method="template_hook" active="1" description="Listen to more thread template hooks"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <optiongroups>
+    <group group_id="MyThread" display_order="1" debug_only="0"/>
+    <option option_id="abautme" edit_format="template" data_type="array" can_backup="1">
+      <default_value></default_value>
+      <edit_format_params>abautme</edit_format_params>
+      <sub_options>*</sub_options>
+      <relation group_id="MyThread" display_order="1000"/>
+    </option>
+    <option option_id="enable_disable" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="MyThread" display_order="1"/>
+    </option>
+    <option option_id="limit_thread" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+      <default_value>5</default_value>
+      <edit_format_params>min=1
+max=20
+size=3</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="MyThread" display_order="100"/>
+    </option>
+    <option option_id="mythread_lenght_title" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+      <default_value>150</default_value>
+      <edit_format_params>size=3
+min=20</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="MyThread" display_order="110"/>
+    </option>
+    <option option_id="mythread_timepost" edit_format="select" data_type="string" can_backup="1">
+      <default_value>none</default_value>
+      <edit_format_params>none=لا تعرض التوقيت
+Y/m/d=2012/01/01
+Y M D=1 جانفي 2012
+y/m/d g:i A = d/m/y g:i A
+g:i A y/m/d = g:i A d/m/y</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="MyThread" display_order="200"/>
+    </option>
+    <option option_id="not_infor" edit_format="callback" data_type="array" can_backup="1">
+      <default_value></default_value>
+      <edit_format_params>MyThread_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <relation group_id="MyThread" display_order="300"/>
+    </option>
+    <option option_id="order_by" edit_format="radio" data_type="string" can_backup="1">
+      <default_value>random</default_value>
+      <edit_format_params>post_date=عرض آخر المواضيع
+random=اختيار مواضيع عشوائية
+view_count=حسب المواضيع الأكثر مشاهدة</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="MyThread" display_order="210"/>
+    </option>
+    <option option_id="usr_group" edit_format="callback" data_type="array" can_backup="1">
+      <default_value></default_value>
+      <edit_format_params>MyThread_Listener::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <relation group_id="MyThread" display_order="400"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="admin_navigation_myth" version_id="1" version_string="1.0"><![CDATA[من مواضيع العضو]]></phrase>
+    <phrase title="mythread" version_id="1" version_string="1.0"><![CDATA[من مواضيع العضو]]></phrase>
+    <phrase title="option_abautme" version_id="1" version_string="1.0"><![CDATA[abautme]]></phrase>
+    <phrase title="option_abautme_explain" version_id="1" version_string="1.0"><![CDATA[]]></phrase>
+    <phrase title="option_enable_disable" version_id="1" version_string="1.0"><![CDATA[تفعيل المنتج ؟]]></phrase>
+    <phrase title="option_enable_disable_explain" version_id="1" version_string="1.0"><![CDATA[لتفعيل أو تعطيل المنتج]]></phrase>
+    <phrase title="option_group_MyThread" version_id="1" version_string="1.0"><![CDATA[من مواضيع العضو]]></phrase>
+    <phrase title="option_group_MyThread_description" version_id="1" version_string="1.0"><![CDATA[آخر مواضيع العضو أسفل الموضوع]]></phrase>
+    <phrase title="option_limit_thread" version_id="1" version_string="1.0"><![CDATA[عدد المواضيع المعروضة]]></phrase>
+    <phrase title="option_limit_thread_explain" version_id="1" version_string="1.0"><![CDATA[حدد عدد المواضيع التي سيتم جلبها<br /> 
+<p>أقل عدد = 1 .. أقصى حد = 20</p>]]></phrase>
+    <phrase title="option_mythread_lenght_title" version_id="1" version_string="1.0"><![CDATA[قطع الموضوع]]></phrase>
+    <phrase title="option_mythread_lenght_title_explain" version_id="1" version_string="1.0"><![CDATA[بالطبع , يوجد لدينا فى المنتديات اسماء مواضيع كبيره ولدينا ايضاً ستايلات غير ممتده، يمكنك حل هذه المشكلة بتحديد عدد الأحرف التي ستظهر بعنوان الموضوع قبل أن يتم قطعه <br />
+<strong>
+العدد الافتراضى للاحرف : 150
+</strong>]]></phrase>
+    <phrase title="option_mythread_timepost" version_id="1" version_string="1.0"><![CDATA[طريقة عرض وقت الموضوع]]></phrase>
+    <phrase title="option_mythread_timepost_explain" version_id="1" version_string="1.0"><![CDATA[]]></phrase>
+    <phrase title="option_not_infor" version_id="1" version_string="1.0"><![CDATA[تصاريح الأقسام]]></phrase>
+    <phrase title="option_not_infor_explain" version_id="1" version_string="1.0"><![CDATA[ماهى الاقسام التى تريد منع ظهورها فى مواضيع العضو ؟]]></phrase>
+    <phrase title="option_order_by" version_id="1" version_string="1.0"><![CDATA[طريقة العرض]]></phrase>
+    <phrase title="option_order_by_explain" version_id="1" version_string="1.0"><![CDATA[]]></phrase>
+    <phrase title="option_usr_group" version_id="1" version_string="1.0"><![CDATA[المجموعات المستثناة]]></phrase>
+    <phrase title="option_usr_group_explain" version_id="1" version_string="1.0"><![CDATA[المجموعات المستثناة]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates>
+    <template title="MyThread" version_id="1" version_string="1.0"><![CDATA[<xen:if is="{$message.position} == 0 and {$mythread.myth}">
+<xen:include template="preview_tooltip" />
+<xen:require css="MyThread.css" />
+<div class="clear"></div>
+<div class="MyThread">
+    <div class="bbCodeBlock bbCodeQuote">
+        <div class="attribution type">{xen:phrase  mythread}</div>
+        <blockquote><ul>
+            <xen:foreach loop="$mythread.myth" value="$thread">
+            <li><a class="PreviewTooltip" data-previewUrl="{xen:link threads/preview, $thread}" href="{xen:link 'threads', $thread}"> - {$thread.title}</a>
+             <span class="morethread_time muted">{$thread.post_date}</span></li>
+            </xen:foreach>
+        </ul></blockquote>
+    </div>
+</div>
+<div class="clear"></div>
+</xen:if>]]></template>
+    <template title="MyThread.css" version_id="1" version_string="1.0"><![CDATA[.MyThread .bbCodeBlock
+{
+
+	margin: 1em {xen:property messageInfo.margin-left} 1em 0;
+	border: 1px solid {xen:property primaryLighterStill};
+	border-radius: 5px;
+
+}
+.MyThread .bbCodeBlock li{ padding:4px 0px 2px 0px;}
+.MyThread .morethread_time{ font-size:11px;  margin-left:5px;}
+.MyThread .bbCodeQuote
+{
+	border-color: {xen:property secondaryLighter};
+}
+.MyThread .bbCodeQuote blockquote
+{ 	
+        font-style: normal !important;
+	font-size: 8pt !important;
+	background: {xen:property secondaryLightest} url('{xen:property imagePath}/xenforo/gradients/category-23px-light.png') repeat-x top;
+	padding: 10px;
+	border-radius: 4px;
+}
+.MyThread .bbCodeQuote .attribution
+{
+	color: {xen:property contentText};
+	background: {xen:property secondaryLighter} url('{xen:property imagePath}/xenforo/gradients/form-button-white-25px.png') repeat-x top;
+	border-bottom: 1px solid {xen:property secondaryLight};
+	font-size: 11pt;
+        font-weight:bold;
+}
+]]></template>
+  </templates>
+  <bb_code_media_sites/>
+  <template_modifications/>
+</addon>
